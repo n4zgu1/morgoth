@@ -13,7 +13,4 @@ Morgoth is a extensive python based ransomware.
 <br>
 [Website](n4zgu1.com "n4zgu1")
 
-``` python
-import markdown
-print('Hello world')
-```
+### More coming soon

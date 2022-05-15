@@ -15,7 +15,7 @@ Morgoth is a extensive python based ransomware.
 
 ##### How to use
 
-Set target to "C:\\" on windows and "/" on mac or linux to encrypt ALL data
+Set target to "C:\\" on windows or "/" on mac or linux to encrypt ALL data
 ``` python
 target = 'testfolder' # targeting folder
 ```

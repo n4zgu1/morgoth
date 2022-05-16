@@ -1,4 +1,0 @@
-
-13:06:26 start new session
-13:06:30 conection from ('127.0.0.1', 52353)
-13:06:30 [Errno 2] No such file or directory: 'data/Archiv.zip'

@@ -1,43 +1,10 @@
-from Cryptodome.PublicKey import RSA
-from Cryptodome.Cipher import PKCS1_OAEP
-from Cryptodome.Hash import SHA256
-
-def generate_sk():
-    key = RSA.generate(3072)
-    with open("secretKey.pem", "wb") as f_out:
-        f_out.write(key.export_key(format='PEM'))
-    return key
-
-def import_key(filename):
+def encrypt_for_transefer(filename, password):
     with open(filename, 'rb') as f_in:
-        key = RSA.import_key(f_in.read())
-    return key
+        original_data = f_in.read()
+        print(original_data)
+    encrypted = bytes(a ^ b for (a, b) in zip(original_data, password))
+    print(encrypted)
+    #with open(filename, 'wb') as f_out:
+    #    pass
 
-def generate_pk(sk):
-    pk = sk.publickey()
-    with open("publicKey.pem", "wb") as f_out:
-        f_out.write(pk.export_key(format='PEM'))
-    return pk
-
-def encrypt(pk_receiver, message):
-    cipher = PKCS1_OAEP.new(pk_receiver)
-    c = cipher.encrypt(message)
-    return c
-
-def decrypt(sk, c):
-    cipher = PKCS1_OAEP.new(sk)
-    m = cipher.decrypt(c)
-    return m
-
-def footprint(pk):
-    hasher = SHA256.new(pk)
-    return hasher.digest()
-
-#key = generate_sk()
-key = import_key('secretKey.pem')
-pk = generate_pk(key)
-c = encrypt(pk, b"Hallo Welt")
-print(c)
-m = decrypt(key, c)
-print(m)
-print(footprint(pk.export_key(format='PEM')))
+encrypt_for_transefer('testfile.txt', b'tttt')

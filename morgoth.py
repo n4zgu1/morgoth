@@ -17,8 +17,8 @@ import socket
 thispath = os.getcwd()
 hostname = socket.gethostname()
 
-target = 'testfolder' # targeting folder
-keyfolder = 'd3vil-keys/' #path to safe keyfiles
+target = '../testfolder' # targeting folder
+keyfolder = '../d3vil-keys/' #path to safe keyfiles
 zpname = hostname.replace(' ', '-') + '.zip' #path to zip-file
 sep = '#SEP#'
 

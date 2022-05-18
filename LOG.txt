@@ -1,0 +1,20 @@
+
+13:33:55 start new session
+13:34:38 conection from ('127.0.0.1', 59080)
+13:34:38 [Errno 2] No such file or directory: 'data/testzip.zip'
+
+13:37:48 start new session
+13:37:53 conection from ('127.0.0.1', 59081)
+13:37:53 Received file testzip.zip size 548 bytes
+
+19:10:50 start new session
+
+19:11:57 start new session
+
+19:15:10 start new session
+19:15:29 conection from ('127.0.0.1', 59646)
+19:15:29 Received file d3vils-mac.local.zip size 22 bytes
+
+19:16:55 start new session
+19:17:02 conection from ('127.0.0.1', 59647)
+19:17:02 Received file d3vils-mac.local.zip size 35103 bytes
